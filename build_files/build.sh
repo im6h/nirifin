@@ -115,13 +115,39 @@ ADDITIONAL_SYSTEM_APPS=(
 	kcm-fcitx5
 )
 
-# we do all package installs in one rpm-ostree command
-# so that we create minimal layers in the final image
-log "Installing packages using dnf5..."
-dnf5 install --setopt=install_weak_deps=False -y \
-	"${FONTS[@]}" \
-	"${NIRI_PKGS[@]}" \
-	"${ADDITIONAL_SYSTEM_APPS[@]}"
+#######################################################################
+# Variant-specific additions
+#######################################################################
+
+VARIANTS_APPS=(
+	toolbox
+)
+
+# On Bazzite variants, toolbox may have been removed by the base image.
+# Re-install it so it is always available on Bazzite builds.
+log "Installing variant-specific packages..."
+# shellcheck source=/dev/null
+source /etc/os-release
+
+if [[ "${ID}" == "bazzite" || "${ID_LIKE}" == *"bazzite"* ]]; then
+	log "Bazzite variant detected — installing variant packages..."
+	# we do all package installs in one rpm-ostree command
+	# so that we create minimal layers in the final image
+	dnf5 install --setopt=install_weak_deps=False -y \
+		"${FONTS[@]}" \
+		"${NIRI_PKGS[@]}" \
+		"${ADDITIONAL_SYSTEM_APPS[@]}" \
+		"${VARIANTS_APPS[@]}"
+else
+	log "Non-Bazzite variant — skipping variant packages."
+	log "Bazzite variant detected — installing variant packages..."
+	# we do all package installs in one rpm-ostree command
+	# so that we create minimal layers in the final image
+	dnf5 install --setopt=install_weak_deps=False -y \
+		"${FONTS[@]}" \
+		"${NIRI_PKGS[@]}" \
+		"${ADDITIONAL_SYSTEM_APPS[@]}"
+fi
 
 #######################################################################
 ### Disable repositeories so they aren't cluttering up the final image
