@@ -57,7 +57,7 @@ jobs:
     steps:
       # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be
+        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6
 
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
