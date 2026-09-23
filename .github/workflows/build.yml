@@ -45,7 +45,15 @@ jobs:
             image_alias: "nirizite"
             base_image: "ghcr.io/ublue-os/bazzite-gnome:latest"
             image_desc: "Bazzite with Niri"
-
+          - image_name: "nirizite-kde"
+            image_alias: "nirizite-kde"
+            base_image: "ghcr.io/ublue-os/bazzite:latest"
+            image_desc: "Bazzite KDE with Niri"
+          - image_name: "nirirora"
+            image_alias: "nirizite"
+            base_Image: "ghcr.io/ublue-os/aurora-dx:latest"
+            image_desc: "Aurora With Niri"
+            
     steps:
       # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Free Disk Space (Ubuntu)

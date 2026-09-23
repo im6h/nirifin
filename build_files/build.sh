@@ -133,7 +133,7 @@ if [[ "${ID}" == "bazzite" || "${ID_LIKE}" == *"bazzite"* ]]; then
 	log "Bazzite variant detected — installing variant packages..."
 	# we do all package installs in one rpm-ostree command
 	# so that we create minimal layers in the final image
-	dnf5 install --setopt=install_weak_deps=False -y \
+	dnf5 install --skip-broken --setopt=install_weak_deps=False -y \
 		"${FONTS[@]}" \
 		"${NIRI_PKGS[@]}" \
 		"${ADDITIONAL_SYSTEM_APPS[@]}" \
