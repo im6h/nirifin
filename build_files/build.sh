@@ -121,6 +121,7 @@ ADDITIONAL_SYSTEM_APPS=(
 
 VARIANTS_APPS=(
 	toolbox
+	sddm
 )
 
 # On Bazzite variants, toolbox may have been removed by the base image.
